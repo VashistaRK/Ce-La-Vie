@@ -73,16 +73,23 @@ export default function OrderPage() {
   const [cartOpen, setCartOpen] = useState(false);
   const [isOpenHours, setIsOpenHours] = useState(true);
 
+  // ✅ check live time
   useEffect(() => {
-    const now = new Date();
-    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    const checkOpenHours = () => {
+      const now = new Date();
+      const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
-    const openMinutes = 12 * 60 + 30;
-    const closeMinutes = 11 * 60 + 30;
+      const openMinutes = 11 * 60 + 30; // 11:30 AM
+      const closeMinutes = 23 * 60 + 30; // 11:30 PM
 
-    setIsOpenHours(
-      currentMinutes >= openMinutes && currentMinutes <= closeMinutes
-    );
+      setIsOpenHours(
+        currentMinutes >= openMinutes && currentMinutes <= closeMinutes
+      );
+    };
+
+    checkOpenHours(); // run once on mount
+    const interval = setInterval(checkOpenHours, 60 * 1000); // check every minute
+    return () => clearInterval(interval);
   }, []);
 
   const filteredItems = allItems.filter((item) => {
@@ -133,7 +140,7 @@ export default function OrderPage() {
             <p className="text-gray-700 mb-6">
               We are currently closed. Ordering is available only between <br />
               <span className="font-semibold text-[#013024]">
-                12:30 PM - 11:30 PM
+                11:30 AM - 11:30 PM
               </span>
               .
             </p>
