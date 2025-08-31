@@ -61,7 +61,7 @@ export default function CafeIntro() {
               {/* Icon (Charminar) + Text */}
               <a
                 className="relative z-10 flex flex-col items-center gap-2 text-sm"
-                href="/order"
+                href="https://www.celavietherooftop.com/order-menu/parcel"
               >
                 {/* Hyderabad Charminar SVG */}
                 <img
