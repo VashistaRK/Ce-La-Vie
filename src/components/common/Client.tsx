@@ -11,8 +11,8 @@ export default function Clients() {
     <section className="w-full h-screen bg-gradient-to-br from-[#02110D] to-[#111] text-white py-16 px-6 md:px-12">
       <div className="max-w-7xl mx-auto text-start">
         {/* Heading */}
-        <h2 className="text-4xl md:text-5xl font-serif tracking-wide text-[#E4C590] mb-12">
-          OUR CLIENTS
+        <h2 className="text-4xl md:text-5xl font-[Ekatori] tracking-wide text-[#E4C590] mb-12">
+          CUSTOMERS REVIEW
         </h2>
 
         {/* Swiper Carousel */}

@@ -5,51 +5,49 @@ type BookTableFormProps = {
 };
 
 const BookTableForm = ({ closeModal }: BookTableFormProps) => {
-  const [resultsShow, setResultsShow] = useState(false);
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // stop form refresh
-    setResultsShow(true); // show thank you message
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    people: "",
+    time: "",
+    date: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
-  if (resultsShow) {
-    return (
-      <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 px-4">
-        <div className="relative w-full max-w-lg sm:max-w-2xl lg:max-w-4xl rounded-2xl shadow-2xl font-synco overflow-hidden">
-          {/* Background Layers */}
-          <div className="absolute inset-0">
-            {/* Dark gradient base */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#1F252A] via-[#263132] to-[#1b2625]"></div>
-            {/* Image background with 50% opacity */}
-            <div className="absolute inset-0 bg-[url('/images/bg-2.png')] bg-center bg-cover opacity-50"></div>
-            {/* Dark overlay for better contrast */}
-            <div className="absolute inset-0 bg-black/40"></div>
-          </div>
 
-          {/* Content */}
-          <div className="relative z-10 p-6 sm:p-10 md:py-16 md:px-20 text-center text-white">
-            {/* Close Button */}
-            <button
-              onClick={closeModal}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl"
-            >
-              ✕
-            </button>
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-            <h1 className="text-5xl sm:text-6xl font-bold mb-4">THANK YOU!</h1>
-            <h4 className="text-base sm:text-lg font-medium text-gray-300">
-              Our administrator will contact you within 10 minutes
-            </h4>
-          </div>
-        </div>
-      </div>
-    );
-  }
+    // Prepare WhatsApp message
+    const message = `📌 New Table Booking:
+👤 Name: ${formData.name}
+📞 Phone: ${formData.phone}
+👥 People: ${formData.people}
+⏰ Time: ${formData.time}
+📅 Date: ${formData.date}`;
+
+    const phoneNumber = "919494929137"; // <-- Replace with your WhatsApp number
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+      message
+    )}`;
+
+    // Redirect to WhatsApp
+    window.open(whatsappURL, "_blank");
+  };
+
   return (
     <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 px-4">
       <div className="relative w-full max-w-lg sm:max-w-2xl lg:max-w-4xl rounded-lg shadow-lg font-synco overflow-hidden">
         {/* Background Layers */}
         <div className="absolute inset-0">
           <div className="bg-gradient-to-br from-[#1F252A] via-[#263132] to-[#1b2625] absolute inset-0"></div>
-          <div className="bg-[url('images/bg-2.png')] bg-center bg-cover opacity-60 absolute inset-0"></div>
+          <div className="bg-[url('/images/bg-2.png')] bg-center bg-cover opacity-60 absolute inset-0"></div>
           <div className="bg-black/30 absolute inset-0"></div>
         </div>
 
@@ -82,7 +80,10 @@ const BookTableForm = ({ closeModal }: BookTableFormProps) => {
               <label className="block text-sm font-medium">Name</label>
               <input
                 type="text"
+                name="name"
                 placeholder="Your name"
+                value={formData.name}
+                onChange={handleChange}
                 className="w-full px-3 py-2 border-b bg-transparent focus:outline-none focus:border-indigo-500"
                 required
               />
@@ -93,7 +94,10 @@ const BookTableForm = ({ closeModal }: BookTableFormProps) => {
               <label className="block text-sm font-medium">Phone Number</label>
               <input
                 type="tel"
+                name="phone"
                 placeholder="Your phone number"
+                value={formData.phone}
+                onChange={handleChange}
                 className="w-full px-3 py-2 border-b bg-transparent focus:outline-none focus:border-indigo-500"
                 required
               />
@@ -106,8 +110,11 @@ const BookTableForm = ({ closeModal }: BookTableFormProps) => {
               </label>
               <input
                 type="number"
+                name="people"
                 min="1"
                 placeholder="e.g. 4"
+                value={formData.people}
+                onChange={handleChange}
                 className="w-full px-3 py-2 border-b bg-transparent focus:outline-none focus:border-indigo-500"
                 required
               />
@@ -118,6 +125,9 @@ const BookTableForm = ({ closeModal }: BookTableFormProps) => {
               <label className="block text-sm font-medium">Time</label>
               <input
                 type="time"
+                name="time"
+                value={formData.time}
+                onChange={handleChange}
                 className="w-full px-3 py-2 border-b bg-transparent focus:outline-none focus:border-indigo-500"
               />
             </div>
@@ -127,6 +137,9 @@ const BookTableForm = ({ closeModal }: BookTableFormProps) => {
               <label className="block text-sm font-medium">Date</label>
               <input
                 type="date"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
                 className="w-full px-3 py-2 border-b bg-transparent focus:outline-none focus:border-indigo-500"
               />
             </div>
@@ -136,7 +149,7 @@ const BookTableForm = ({ closeModal }: BookTableFormProps) => {
               type="submit"
               className="w-full bg-indigo-600 text-white py-2 rounded-lg font-semibold hover:bg-indigo-700 transition"
             >
-              Confirm Booking
+              Confirm Booking via WhatsApp
             </button>
           </form>
         </div>

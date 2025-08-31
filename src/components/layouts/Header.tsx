@@ -45,7 +45,7 @@ export default function Header() {
           Menu
         </a>
         <a
-          href="/order"
+          href="https://www.celavietherooftop.com/order-menu/parcel"
           className="hover:border-white hover:border hover:bg-white/30 hover:text-black rounded py-2 px-4 transition"
         >
           Order Online
@@ -89,7 +89,7 @@ export default function Header() {
             Menu
           </a>
           <a
-            href="/order"
+            href="https://www.celavietherooftop.com/order-menu/parcel"
             onClick={() => setIsMobileOpen(false)}
             className="hover:text-yellow-400 text-lg"
           >

@@ -77,3 +77,10 @@
 .animate-rotateme {
   animation: rotateme 6s linear infinite;
 }
+
+@layer base {
+  input[type="date"]::-webkit-calendar-picker-indicator,
+  input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+}
