@@ -41,7 +41,7 @@ export default function App() {
           <motion.img
             src="images/logo.png"
             alt="Cafe Logo"
-            className="h-[40vh]"
+            className="h-[10vh]  sm:h-[40vh]"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 1 }}

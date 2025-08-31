@@ -54,7 +54,7 @@ const Insta = () => {
         {/* Scrollable container */}
         <div
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory hide-scrollbar items-end"
+          className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory hide-scrollbar items-start sm:items-end"
           style={{ WebkitOverflowScrolling: "touch" }}
         >
           {posts.map((post, index) => {
